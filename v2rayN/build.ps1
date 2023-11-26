@@ -1,10 +1,9 @@
 msbuild -v:n -m:1 /p:Configuration="Release" `
 	/p:Platform="x64" `
 	/p:SolutionDir="..\" `
-	/p:OutputPath="v2rayN" `
+	-o ".\v2rayN\bin\v2rayn" `
 	/restore `
 	v2rayN\v2rayN.csproj
-	v2rayUpgrade\v2rayUpgrade.csproj
 
 if ($LASTEXITCODE) { exit $LASTEXITCODE } 
 
