@@ -45,7 +45,7 @@ jobs:
       run:  
         cd .\v2rayN\ &&
         dotnet publish `
-        -c $Configuration `
+        -c Release `
         -r 'win-x64' `
         -p:Platform='x64' `
         -p:SelfContained=$True `
