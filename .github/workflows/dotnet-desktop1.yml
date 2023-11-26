@@ -44,7 +44,7 @@ jobs:
  #     run: dotnet build  $env:Solution_Name --configuration Release  -o $env:Wap_Project_Directory
       run:  
         cd .\v2rayN\ &&
-        .\build.ps1 -Configuration Release -OutputPath release
+        .\build.ps1
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts

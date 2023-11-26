@@ -1,39 +1,48 @@
-param (
-	[Parameter()]
-	[ValidateSet('Debug', 'Release')]
-	[string]
-	$Configuration = 'Release',
+msbuild -v:n -m:1 /p:Configuration="Release" `
+	/p:Platform="x64" `
+	/p:SolutionDir="..\" `
+	/restore `
+	v2rayN\v2rayN.csproj
 
-	[Parameter()]
-	[ValidateNotNullOrEmpty()]
-	[string]
-	$OutputPath = 'release',
+if ($LASTEXITCODE) { exit $LASTEXITCODE } 
 
-	[Parameter()]
-	[bool]
-	$SelfContained = $True,
 
-	[Parameter()]
-	[bool]
-	$PublishSingleFile = $True,
+# param (
+# 	[Parameter()]
+# 	[ValidateSet('Debug', 'Release')]
+# 	[string]
+# 	$Configuration = 'Release',
 
-	[Parameter()]
-	[bool]
-	$PublishReadyToRun = $False
-)
+# 	[Parameter()]
+# 	[ValidateNotNullOrEmpty()]
+# 	[string]
+# 	$OutputPath = 'release',
 
-	dotnet publish `
-		-c $Configuration `
-		-r 'win-x64' `
-		-p:Platform='x64' `
-		-p:SelfContained=$True `
-		-p:PublishTrimmed=$False `
-		-p:PublishSingleFile=$True `
-		-p:PublishReadyToRun=$False `
-		-p:PublishReadyToRunShowWarnings=$False `
-		-p:IncludeNativeLibrariesForSelfExtract=$True `
-		-o ".\v2rayN\bin\$Configuration" `
-		'.\v2rayN\v2rayN.csproj'
+# 	[Parameter()]
+# 	[bool]
+# 	$SelfContained = $True,
+
+# 	[Parameter()]
+# 	[bool]
+# 	$PublishSingleFile = $True,
+
+# 	[Parameter()]
+# 	[bool]
+# 	$PublishReadyToRun = $False
+# )
+
+# 	dotnet publish `
+# 		-c $Configuration `
+# 		-r 'win-x64' `
+# 		-p:Platform='x64' `
+# 		-p:SelfContained=$True `
+# 		-p:PublishTrimmed=$False `
+# 		-p:PublishSingleFile=$True `
+# 		-p:PublishReadyToRun=$False `
+# 		-p:PublishReadyToRunShowWarnings=$False `
+# 		-p:IncludeNativeLibrariesForSelfExtract=$True `
+# 		-o ".\v2rayN\bin\$Configuration" `
+# 		'.\v2rayN\v2rayN.csproj'
 #cp -Force ".\v2rayN\bin\$Configuration\v2rayN.exe" $OutputPath
 
 # if ( -Not ( Test-Path ".\Redirector\bin\$Configuration" ) ) {
