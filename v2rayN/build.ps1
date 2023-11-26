@@ -5,7 +5,6 @@ msbuild -v:n -m:1 /p:Configuration="Release" `
 	/restore `
 	v2rayN\v2rayN.csproj
 	v2rayUpgrade\v2rayUpgrade.csproj
-	v2rayN\PacLib\PacLib.csproj
 
 if ($LASTEXITCODE) { exit $LASTEXITCODE } 
 
