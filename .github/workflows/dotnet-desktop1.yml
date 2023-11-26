@@ -35,16 +35,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    # Execute all unit tests in the solution
-    - name: Execute unit tests
-      run: 
-        cd $env:Solution_Name
-        dotnet test 
-
     - name: 12
       run: 
-        cd $env:Solution_Name
-        dotnet test dotnet build --no-restore
+        dotnet test $env:Solution_Name dotnet build --no-restore
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
