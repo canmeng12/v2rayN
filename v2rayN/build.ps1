@@ -22,7 +22,6 @@ param (
 	$PublishReadyToRun = $False
 )
 
-
 	dotnet publish `
 		-c $Configuration `
 		-r 'win-x64' `
@@ -35,37 +34,6 @@ param (
 		-p:IncludeNativeLibrariesForSelfExtract=$True `
 		-o ".\v2rayN\bin\$Configuration" `
 		'.\v2rayN\v2rayN.csproj'
-
-Push-Location (Split-Path $MyInvocation.MyCommand.Path -Parent)
-
-if ( Test-Path -Path $OutputPath ) {
-    rm -Recurse -Force $OutputPath
-}
-New-Item -ItemType Directory -Name $OutputPath | Out-Null
-
-Push-Location $OutputPath
-New-Item -ItemType Directory -Name 'bin'  | Out-Null
-
-
-
-if ( -Not ( Test-Path ".\v2rayN\bin\$Configuration" ) ) {
-	Write-Host
-	Write-Host 'Building v2rayN'
-
-	dotnet publish `
-		-c $Configuration `
-		-r 'win-x64' `
-		-p:Platform='x64' `
-		-p:SelfContained=$SelfContained `
-		-p:PublishTrimmed=$PublishReadyToRun `
-		-p:PublishSingleFile=$PublishSingleFile `
-		-p:PublishReadyToRun=$PublishReadyToRun `
-		-p:PublishReadyToRunShowWarnings=$PublishReadyToRun `
-		-p:IncludeNativeLibrariesForSelfExtract=$SelfContained `
-		-o ".\v2rayN\bin\$Configuration" `
-		'.\v2rayN\v2rayN.csproj'
-	if ( -Not $? ) { exit $lastExitCode }
-}
 #cp -Force ".\v2rayN\bin\$Configuration\v2rayN.exe" $OutputPath
 
 # if ( -Not ( Test-Path ".\Redirector\bin\$Configuration" ) ) {
