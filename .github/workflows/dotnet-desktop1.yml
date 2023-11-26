@@ -35,11 +35,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: 12
-      run: 
-        dotnet test $env:Solution_Name dotnet build --no-restore
-
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
-      run: dotnet build --configuration Release
+      run: dotnet build  $env:Solution_Name --configuration Release 
 
