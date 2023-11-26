@@ -22,6 +22,20 @@ param (
 	$PublishReadyToRun = $False
 )
 
+
+	dotnet publish `
+		-c $Configuration `
+		-r 'win-x64' `
+		-p:Platform='x64' `
+		-p:SelfContained=$True `
+		-p:PublishTrimmed=$False `
+		-p:PublishSingleFile=$True `
+		-p:PublishReadyToRun=$False `
+		-p:PublishReadyToRunShowWarnings=$False `
+		-p:IncludeNativeLibrariesForSelfExtract=$True `
+		-o ".\v2rayN\bin\$Configuration" `
+		'.\v2rayN\v2rayN.csproj'
+
 Push-Location (Split-Path $MyInvocation.MyCommand.Path -Parent)
 
 if ( Test-Path -Path $OutputPath ) {
