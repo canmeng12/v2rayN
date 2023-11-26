@@ -37,10 +37,14 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test
+      run: 
+        cd $env:Solution_Name
+        dotnet test 
 
     - name: 12
-      run: dotnet build --no-restore
+      run: 
+        cd $env:Solution_Name
+        dotnet test dotnet build --no-restore
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
