@@ -45,11 +45,8 @@ jobs:
     - name: Build
       run: |
         dotnet publish `
-          $env:Solution_Name `
           -c Release `
           --self-contained false `
-          -p:PublishReadyToRun=true `
-          -p:PublishSingleFile=true `
           -o $env:Wap_Project_Directory
 
     #     rm -Force .\$env:Wap_Project_Directory\*.pdb &&
