@@ -34,26 +34,8 @@ jobs:
         retain_days: 1
         keep_minimum_runs: 1
 
-    # - name: Install .NET Core
-    #   uses: actions/setup-dotnet@v3
-    #   with:
-    #     dotnet-version: 6.0.x
-
-    # - name: Setup MSBuild.exe
-    #   uses: microsoft/setup-msbuild@v1.3.1
-
     - name: Build
-      run: |
-        cd v2rayN &&
-        dotnet publish `
-          -c Release `
-          --self-contained false `
-          -o $env:Wap_Project_Directory
-
-    #     rm -Force .\$env:Wap_Project_Directory\*.pdb &&
-    #     rm -Force .\$env:Wap_Project_Directory\*.xml
-    # - name: Build
-    #   run: rm -Force .\$env:Wap_Project_Directory\*.pdb 
+      run: .\build.ps1
 
     - name: Package
       shell: pwsh
