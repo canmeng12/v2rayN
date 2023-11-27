@@ -8,6 +8,7 @@ dotnet publish `
 #rm -Force .\$env:Wap_Project_Directory\*.pdb &&
 #rm -Force .\$env:Wap_Project_Directory\*.xml
 
+ls .\v2rayN\bin\v2rayN
 if ($LASTEXITCODE) { exit $LASTEXITCODE } 
 
 Write-Host 'Build done'
