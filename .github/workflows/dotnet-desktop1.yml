@@ -37,7 +37,8 @@ jobs:
     - name: Build
       shell: pwsh
       run:  cd v2rayN && 
-        .\build.ps1
+        .\build.ps1 &&
+        ls .\v2rayN\bin\v2rayN
 
     # - name: Package
     #   shell: pwsh
