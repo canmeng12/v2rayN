@@ -51,7 +51,7 @@ jobs:
           --self-contained=false `
           -p:PublishReadyToRun=true `
           -p:PublishSingleFile=true `
-          -o $env:Wap_Project_Directory && cd ..
+          -o $env:Wap_Project_Directory && cd .. &&
 
         rm -Force .\$env:Wap_Project_Directory\*.pdb && 
         ls $env:Wap_Project_Directory
