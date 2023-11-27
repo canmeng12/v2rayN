@@ -15,7 +15,7 @@ jobs:
     runs-on: windows-latest 
 
     env:
-      Solution_Name: v2rayN\v2rayN.sln
+      #Solution_Name: v2rayN\v2rayN.sln
       #Test_Project_Path: v2rayN\v2rayN\v2rayN.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
       Wap_Project_Directory: bin\v2rayN
       #Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
@@ -39,8 +39,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.3.1
+    # - name: Setup MSBuild.exe
+    #   uses: microsoft/setup-msbuild@v1.3.1
 
     - name: Build
       run: |
@@ -50,10 +50,10 @@ jobs:
           --self-contained=false `
           -p:PublishReadyToRun=true `
           -p:PublishSingleFile=true `
-          -o $env:Wap_Project_Directory &&
+          -o $env:Wap_Project_Directory
 
-        rm -Force .\$env:Wap_Project_Directory\*.pdb &&
-        rm -Force .\$env:Wap_Project_Directory\*.xml
+    #     rm -Force .\$env:Wap_Project_Directory\*.pdb &&
+    #     rm -Force .\$env:Wap_Project_Directory\*.xml
     # - name: Build
     #   run: rm -Force .\$env:Wap_Project_Directory\*.pdb 
 
