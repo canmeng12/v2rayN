@@ -1,6 +1,5 @@
 Write-Host 'Building'
 
-cd v2rayN &&
 dotnet publish `
     -c Release `
     --self-contained false `
