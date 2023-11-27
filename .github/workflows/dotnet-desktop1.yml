@@ -35,7 +35,8 @@ jobs:
         keep_minimum_runs: 1
 
     - name: Build
-      run: .\v2rayN\build.ps1
+      run:  cd v2rayN && 
+        .\build.ps1
 
     - name: Package
       shell: pwsh

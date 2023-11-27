@@ -5,8 +5,8 @@ dotnet publish `
     --self-contained false `
     -o $env:Wap_Project_Directory  &&
 
-rm -Force .\$env:Wap_Project_Directory\*.pdb &&
-rm -Force .\$env:Wap_Project_Directory\*.xml
+#rm -Force .\$env:Wap_Project_Directory\*.pdb &&
+#rm -Force .\$env:Wap_Project_Directory\*.xml
 
 if ($LASTEXITCODE) { exit $LASTEXITCODE } 
 
