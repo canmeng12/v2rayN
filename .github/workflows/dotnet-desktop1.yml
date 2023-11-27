@@ -34,27 +34,23 @@ jobs:
         retain_days: 1
         keep_minimum_runs: 1
 
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
+    # - name: Install .NET Core
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: 6.0.x
 
     # - name: Setup MSBuild.exe
     #   uses: microsoft/setup-msbuild@v1.3.1
 
     - name: Build
       run: |
-        cd v2rayN && 
         dotnet publish `
           $env:Solution_Name `
           -c Release `
-          --self-contained=false `
+          --self-contained false `
           -p:PublishReadyToRun=true `
           -p:PublishSingleFile=true `
-          -o $env:Wap_Project_Directory && cd .. &&
-
-        rm -Force .\$env:Wap_Project_Directory\*.pdb && 
-        ls $env:Wap_Project_Directory
+          -o $env:Wap_Project_Directory
 
     #     rm -Force .\$env:Wap_Project_Directory\*.pdb &&
     #     rm -Force .\$env:Wap_Project_Directory\*.xml
