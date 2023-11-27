@@ -1,4 +1,4 @@
-name: .NET Core Desktop
+name: release
 
 on:
   push:
@@ -7,20 +7,17 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   build:
-
     strategy:
       matrix:
         configuration: [Release]
 
-    runs-on: windows-latest  # For a list of available runner types, refer to
-                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: windows-latest 
 
     env:
       Solution_Name: v2rayN\v2rayN.sln
       #Test_Project_Path: v2rayN\v2rayN\v2rayN.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-      Wap_Project_Directory: v2rayN\v2rayN\bin
+      Wap_Project_Directory: bin\v2rayN
       #Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
@@ -29,32 +26,52 @@ jobs:
       with:
         fetch-depth: 0
 
-    # Install the .NET Core workload
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
 
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.3.1
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
- #     run: dotnet build  $env:Solution_Name --configuration Release  -o $env:Wap_Project_Directory
-      run:  
-        cd .\v2rayN\ &&
-        .\build.ps1
+    - name: Build
+      run:
+        dotnet publish `
+          $env:Solution_Name 
+          -c Release `
+          --self-contained=false `
+          -p:PublishReadyToRun=true `
+          -p:PublishSingleFile=true `
+          -o $env:Wap_Project_Directory &&
 
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+        rm -Force ".\$env:Wap_Project_Directory\*.pdb" &&
+        rm -Force ".\$env:Wap_Project_Directory\*.xml"
+
+    - name: Package
+      shell: pwsh
+      run: |
+        7z a -mx9 v2rayN.7z $env:Wap_Project_Directory
+
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: bin
+        name: v2rayN.zip
         path: ${{ env.Wap_Project_Directory }}
       
-
-
-
-      
-
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     prerelease: ${{ contains(github.ref, '-') }}
+      #     draft: false
+      #     files: |
+      #       v2rayN.7z
+      #     body: |
+      #       [![](https://img.shields.io/badge/Telegram-Channel-blue)](https://t.me/netch_channel) [![](https://img.shields.io/badge/Telegram-Group-green)](https://t.me/netch_group)
+      #       ## Changelogs
+      #       * This is an automated deployment of GitHub Actions, the change log should be updated manually soon
+            
+      #       ## 更新日志
+      #       * 这是 GitHub Actions 自动化部署，更新日志应该很快会手动更新
