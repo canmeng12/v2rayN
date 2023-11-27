@@ -44,13 +44,16 @@ jobs:
 
     - name: Build
       run: |
-        cd v2rayN &&
+        cd v2rayN && 
         dotnet publish `
           -c Release `
           --self-contained=false `
           -p:PublishReadyToRun=true `
           -p:PublishSingleFile=true `
-          -o $env:Wap_Project_Directory
+          -o $env:Wap_Project_Directory && 
+
+        rm -Force .\$env:Wap_Project_Directory\*.pdb && 
+        ls $env:Wap_Project_Directory
 
     #     rm -Force .\$env:Wap_Project_Directory\*.pdb &&
     #     rm -Force .\$env:Wap_Project_Directory\*.xml
