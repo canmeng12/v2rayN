@@ -44,8 +44,8 @@ jobs:
           -p:PublishSingleFile=true `
           -o $env:Wap_Project_Directory &&
 
-        rm -Force ".\$env:Wap_Project_Directory\*.pdb" &&
-        rm -Force ".\$env:Wap_Project_Directory\*.xml"
+        rm -Force .\$env:Wap_Project_Directory\*.pdb &&
+        rm -Force .\$env:Wap_Project_Directory\*.xml
 
     - name: Package
       shell: pwsh
