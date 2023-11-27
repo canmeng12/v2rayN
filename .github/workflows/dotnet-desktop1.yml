@@ -26,6 +26,14 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: 删除工作流运行
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ github.token }}
+        repository: ${{ github.repository }}
+        retain_days: 1
+        keep_minimum_runs: 1
+
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
       with:
@@ -37,17 +45,17 @@ jobs:
     - name: Build
       run: |
         dotnet publish `
-          $env:Solution_Name 
+          $env:Solution_Name `
           -c Release `
           --self-contained=false `
           -p:PublishReadyToRun=true `
           -p:PublishSingleFile=true `
-          -o $env:Wap_Project_Directory
+          -o $env:Wap_Project_Directory &&
 
-        # rm -Force .\$env:Wap_Project_Directory\*.pdb &&
-        # rm -Force .\$env:Wap_Project_Directory\*.xml
-    - name: Build
-      run: rm -Force .\$env:Wap_Project_Directory\*.pdb 
+        rm -Force .\$env:Wap_Project_Directory\*.pdb &&
+        rm -Force .\$env:Wap_Project_Directory\*.xml
+    # - name: Build
+    #   run: rm -Force .\$env:Wap_Project_Directory\*.pdb 
 
     - name: Package
       shell: pwsh
