@@ -46,7 +46,7 @@ jobs:
       run: |
         cd v2rayN && 
         dotnet publish `
-          $env:Solution_Name
+          $env:Solution_Name `
           -c Release `
           --self-contained=false `
           -p:PublishReadyToRun=true `
