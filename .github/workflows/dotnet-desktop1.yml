@@ -34,7 +34,7 @@ jobs:
 
     - name: Build
       run:  cd v2rayN && 
-        .\build.ps1
+        .\build.ps1 && ls && cd .. && ls &&
 
     # - name: Package
     #   shell: pwsh
@@ -44,11 +44,10 @@ jobs:
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
+
       with:
         name: v2rayN
-        path: ls && cd .. && 
-          ls &&
-          v2rayN.zip
+        path: v2rayN.zip
 
       
     # - name: Release
