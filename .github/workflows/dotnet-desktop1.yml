@@ -46,7 +46,9 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: v2rayN
-        path: cd .. && v2rayN.zip
+        path: ls && cd .. && 
+          ls &&
+          v2rayN.zip
 
       
     # - name: Release
