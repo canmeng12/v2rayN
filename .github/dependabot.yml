@@ -4,23 +4,14 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      time: "00:35"
+      time: "00:39"
       timezone: "Asia/Shanghai"
 
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
       interval: "daily"
-      time: "00:00"
-      timezone: "Asia/Shanghai"
-    labels:
-      - "automatic"
-
-  - package-ecosystem: "gomod"
-    directory: "/"
-    schedule:
-      interval: "daily"
-      time: "00:00"
+      time: "00:39"
       timezone: "Asia/Shanghai"
     labels:
       - "automatic"
