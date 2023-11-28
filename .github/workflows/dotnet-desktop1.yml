@@ -35,7 +35,6 @@ jobs:
     - name: Build
       run:  cd v2rayN && 
         .\build.ps1 && 
-        ls
         
     # - name: Package
     #   shell: pwsh
@@ -43,7 +42,8 @@ jobs:
     #     7z a -mx9 ..\v2rayN.7z $env:Wap_Project_Directory
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      run: ls
+    - uses: actions/upload-artifact@v3
       with:
         name: v2rayN
         path: 
